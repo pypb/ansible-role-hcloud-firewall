@@ -1,0 +1,17 @@
+---
+- name: "Creating Hetzner Cloud firewall"
+  hetzner.hcloud.firewall:
+    api_token: "{{ hcloud_api_token }}"
+    name: "{{ hcloud_firewall_name }}"
+    rules: "{{ hcloud_firewall_rules }}"
+    state: present
+  delegate_to: localhost
+  when: hcloud_firewall_state == 'present'
+
+- name: "Deleting Hetzner Cloud firewall"
+  hetzner.hcloud.firewall:
+    api_token: "{{ hcloud_api_token }}"
+    name: "{{ hcloud_firewall_name }}"
+    state: absent
+  delegate_to: localhost
+  when: hcloud_firewall_state == 'absent'
